@@ -21,6 +21,7 @@ function M.toggle_term()
     else
       M.mark()
       vim.api.nvim_set_current_buf(M._term_buffer)
+      vim.cmd("startinsert")
     end
   else
     M.mark()
