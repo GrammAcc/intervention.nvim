@@ -61,3 +61,10 @@ in each neovim session.
 This does not mess with any of your other configuration related to terminals or interfere with
 any of the behavior of neovim's terminal commands, so it should be compatible with any other plugins
 you use for terminal navigation.
+
+## Why not global marks?
+
+Honestly, there isn't really much difference between using this plugin and just assigning a global mark wherever
+you would call the `mark()` function. I just don't really like marks since they can be a pain to keep track of, and
+I like having a simple function call for common tasks like toggling a terminal, so I prefer the interface in
+this plugin over setting marks in my keymaps.
