@@ -14,17 +14,22 @@ function M.mark()
   M._recall_buffer = vim.api.nvim_get_current_buf()
 end
 
-function M.toggle_term()
+-- @param opts A table defauling to: {update_mark = true}
+function M.toggle_term(opts)
   if M._term_buffer and vim.api.nvim_buf_is_valid(M._term_buffer) then
     if vim.api.nvim_get_current_buf() == M._term_buffer then
       M.recall()
     else
-      M.mark()
+      if opts.update_mark == true then
+        M.mark()
+      end
       vim.api.nvim_set_current_buf(M._term_buffer)
       vim.cmd("startinsert")
     end
   else
-    M.mark()
+    if opts.update_mark == true then
+      M.mark()
+    end
     vim.cmd("term")
     vim.cmd("startinsert")
     M._term_buffer = vim.api.nvim_get_current_buf()
