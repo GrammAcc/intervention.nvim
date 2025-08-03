@@ -27,11 +27,11 @@ Use as a regular lua module:
 local lsp_zero = require('lsp-zero')
 local intervention = require("intervention")
 
-vim.keymap.set("n", "<leader>q", function() intervention:recall() end)
+vim.keymap.set("n", "<leader>q", function() intervention.recall() end)
 
 lsp_zero.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
-  vim.keymap.set("n", "<leader>g", function() intervention:mark() vim.lsp.buf.definition() end, opts)
+  vim.keymap.set("n", "<leader>g", function() intervention.mark() vim.lsp.buf.definition() end, opts)
 end)
 ```
 
@@ -48,7 +48,7 @@ its environment:
 ```lua
 local intervention = require("intervention")
 
-vim.keymap.set({"n","t"}, "<leader>t", function() intervention:toggle_term() end)
+vim.keymap.set({"n","t"}, "<leader>t", function() intervention.toggle_term() end)
 ```
 
 This will switch to a dedicated terminal buffer and record the current buffer with `mark()` so that
@@ -61,6 +61,11 @@ in each neovim session.
 This does not mess with any of your other configuration related to terminals or interfere with
 any of the behavior of neovim's terminal commands, so it should be compatible with any other plugins
 you use for terminal navigation.
+
+`toggle_term` accepts an `opts` table defaulting to: `{update_mark=true}`.
+
+If `update_mark` is set to anything other than `true`, then `toggle_term` will call `mark()` before
+opening the terminal. This is useful for potentially ephemeral buffer filetypes like netrw.
 
 ## Why not global marks?
 
