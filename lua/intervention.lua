@@ -14,8 +14,11 @@ function M.mark()
   M._recall_buffer = vim.api.nvim_get_current_buf()
 end
 
--- @param opts A table defauling to: {update_mark = true}
+-- @param opts A table defaulting to: {update_mark = true}
 function M.toggle_term(opts)
+  if opts == nil then
+    opts = {update_mark = true}
+  end
   if M._term_buffer and vim.api.nvim_buf_is_valid(M._term_buffer) then
     if vim.api.nvim_get_current_buf() == M._term_buffer then
       M.recall()
